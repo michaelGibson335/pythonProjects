@@ -1,5 +1,6 @@
 ##To Do project
 
+
 #This is the main loop that runs the program continuously
 #while true, unless they select exit and the program breaks
 while True:
@@ -15,7 +16,13 @@ while True:
         #also there is a todos.txt file that gets written to with the todo values
         case 'add':
             todo = input("Enter a todo: ") + "\n"
+
+            file = open('todos.txt', 'r')
+            todos = file.readlines()
+            file.close()
+
             todos.append(todo)
+
             file = open('todos.txt', 'w')
             file.writelines(todos)
         #case show, displays the items in the array so far
