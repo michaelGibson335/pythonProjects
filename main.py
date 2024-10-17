@@ -17,19 +17,26 @@ while True:
         case 'add':
             todo = input("Enter a todo: ") + "\n"
 
-            file = open('todos.txt', 'r')
+            file = open('files/todos.txt', 'r')
             todos = file.readlines()
             file.close()
 
             todos.append(todo)
 
-            file = open('todos.txt', 'w')
+            file = open('files/todos.txt', 'w')
             file.writelines(todos)
+            file.close()
         #case show, displays the items in the array so far
         #uses for loop and enumerate to display items in a numberical fashion
         #with a dash in between
+        #show also reads the contents from the file todos.txt now
         case 'show' | 'display':
+            file = open('files/todos.txt', 'r')
+            todos = file.readlines()
+            file.close()
+
             for index, item in enumerate(todos):
+                item = item.strip('\n')
                 row = f"{index + 1}-{item}"
                 print(row)
         #case edit, allow user to update todos list by selecting
