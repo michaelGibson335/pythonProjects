@@ -12,7 +12,7 @@ while True:
     
     
     if 'add' in user_action:
-        todo = input("Enter a todo: ") + "\n"
+        todo = user_action[4:]
 
         with open('files/todos.txt', 'r') as file:
             todos = file.readlines()
@@ -23,7 +23,7 @@ while True:
                  file.writelines(todos)
 
         
-    if 'show' in user_action:
+    elif 'show' in user_action:
 
         with open('files/todos.txt', 'r') as file:
             todos = file.readlines()
@@ -33,7 +33,7 @@ while True:
             row = f"{index + 1}-{item}"
             print(row)
                
-    if 'edit' in user_action:
+    elif 'edit' in user_action:
         number = int(input("Number of the todo to edit: "))
         number -= 1
 
@@ -48,7 +48,7 @@ while True:
 
 
         #complete, this allows a user to remove a specific to do by number, like checking off the list
-    if 'complete' in user_action:
+    elif 'complete' in user_action:
         number = int(input("Number of the todo to complete: "))
 
         with open('files/todos.txt', 'r') as file:
@@ -66,7 +66,7 @@ while True:
 
 
         #case exit, breaks out of the loop once exit is input    
-    if 'exit' in user_action:
+    elif 'exit' in user_action:
         break
         
 print("Bye!")

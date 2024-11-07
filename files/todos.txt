@@ -1,1 +1,3 @@
 shop
+python3 -u "/Users/michaelgibson/Documents/GitHub/pythonProjects/main.py"
+fix the car
