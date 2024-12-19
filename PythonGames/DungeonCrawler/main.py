@@ -25,21 +25,28 @@ def scaleImage(image, scale):
     height = image.get_height()
     return pygame.transform.scale(image, (width * scale, height * scale))
 
+#load character images
+charactersAnimations = []
+characterTypes = ["elf", "imp", "skeleton", "goblin", "muddy", "tiny_zombie", "big_demon"]
+
+
 #pull image 0-3 and store in array and loop through them
 #to give animation effect of character moving
 animationTypes = ["idle", "run"]
-animationList = []
-for animation in animationTypes:
-    #reset temp list of imgs
-    tempList = []
-    for i in range(4):
-        img = pygame.image.load(f"assets/images/characters/elf/{animation}/{i}.png").convert_alpha()
-        img = scaleImage(img, constants.SCALE)
-        tempList.append(img)
-    animationList.append(tempList)
+for characterType in characterTypes:
+    animationList = []
+    for animation in animationTypes:
+        #reset temp list of imgs
+        tempList = []
+        for i in range(4):
+            img = pygame.image.load(f"assets/images/characters/{characterType}/{animation}/{i}.png").convert_alpha()
+            img = scaleImage(img, constants.SCALE)
+            tempList.append(img)
+        animationList.append(tempList)
+    charactersAnimations.append(animationList)
 
 #player creation
-dungeonPlayer = Character(100, 100, animationList)
+dungeonPlayer = Character(100, 100, charactersAnimations, 0)
 
 
 #loop to continue game

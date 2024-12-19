@@ -6,14 +6,15 @@ import constants
 #x and y allow for positioning character on the screen
 #also creating character dimensions
 class Character():
-    def __init__(self, x, y, animationList):
+    def __init__(self, x, y, charactersAnimations, charType):
+        self.charType = charType
         self.flip = False
-        self.animationList = animationList
+        self.animationList = charactersAnimations[charType]
         self.frame_index = 0
         self.action = 0 #0 is for idle, and 1 is for run
         self.update_time = pygame.time.get_ticks()
         self.running = False
-        self.image = animationList[self.action][self.frame_index]
+        self.image = self.animationList[self.action][self.frame_index]
         self.rect = pygame.Rect(0, 0, 40, 40)
         self.rect.center = (x, y)
 
