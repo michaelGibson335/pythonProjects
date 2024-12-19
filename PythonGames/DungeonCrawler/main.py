@@ -65,6 +65,9 @@ while(continueLoop):
     #move dungeonPlayer on screen
     dungeonPlayer.move(dx, dy)
 
+    #update dungeonPlayer
+    dungeonPlayer.update()
+
     # render dungeonPlayer on the screen
     dungeonPlayer.draw(screen)
 

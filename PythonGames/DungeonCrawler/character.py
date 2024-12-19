@@ -8,6 +8,7 @@ import constants
 class Character():
     def __init__(self, x, y, animationList):
         self.flip = False
+        self.animationList = animationList
         self.frame_index = 0
         self.update_time = pygame.time.get_ticks()
         self.image = animationList[self.frame_index]
@@ -31,6 +32,19 @@ class Character():
 
         self.rect.x += dx
         self.rect.y += dy
+
+    #control the speed of animation to frame rate ratio
+    def update(self):
+        animation_cooldown = 70
+        #update image
+        self.image = self.animationList[self.frame_index]
+        #check if time has passed since last animation update
+        if pygame.time.get_ticks() - self.update_time > animation_cooldown:
+            self.frame_index += 1
+            self.update_time = pygame.time.get_ticks()
+        #check if animation is completed
+        if self.frame_index >= len(self.animationList):
+            self.frame_index = 0
 
     #draw rectangle on the screen
     #this is to help draw the character on the screen
