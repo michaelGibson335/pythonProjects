@@ -27,11 +27,16 @@ def scaleImage(image, scale):
 
 #pull image 0-3 and store in array and loop through them
 #to give animation effect of character moving
+animationTypes = ["idle", "run"]
 animationList = []
-for i in range(4):
-    img = pygame.image.load(f"assets/images/characters/elf/idle/{i}.png").convert_alpha()
-    img = scaleImage(img, constants.SCALE)
-    animationList.append(img)
+for animation in animationTypes:
+    #reset temp list of imgs
+    tempList = []
+    for i in range(4):
+        img = pygame.image.load(f"assets/images/characters/elf/{animation}/{i}.png").convert_alpha()
+        img = scaleImage(img, constants.SCALE)
+        tempList.append(img)
+    animationList.append(tempList)
 
 #player creation
 dungeonPlayer = Character(100, 100, animationList)

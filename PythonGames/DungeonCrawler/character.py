@@ -10,8 +10,10 @@ class Character():
         self.flip = False
         self.animationList = animationList
         self.frame_index = 0
+        self.action = 0 #0 is for idle, and 1 is for run
         self.update_time = pygame.time.get_ticks()
-        self.image = animationList[self.frame_index]
+        self.running = False
+        self.image = animationList[self.action][self.frame_index]
         self.rect = pygame.Rect(0, 0, 40, 40)
         self.rect.center = (x, y)
 
@@ -19,7 +21,9 @@ class Character():
     #character is passed with x and y values and when
     #move is called, pixels are incremented based on key presses
     def move(self, dx, dy):
-
+        self.running = False
+        if dx != 0 or dy != 0:
+            self.running = True
         if dx < 0:
             self.flip = True
         if dx > 0:
@@ -35,16 +39,32 @@ class Character():
 
     #control the speed of animation to frame rate ratio
     def update(self):
+
+        #check what action the dungeonPlayer is performing
+        if self.running == True:
+            self.updateAction(1)
+        else:
+            self.updateAction(0)
+
+
         animation_cooldown = 70
         #update image
-        self.image = self.animationList[self.frame_index]
+        self.image = self.animationList[self.action][self.frame_index]
         #check if time has passed since last animation update
         if pygame.time.get_ticks() - self.update_time > animation_cooldown:
             self.frame_index += 1
             self.update_time = pygame.time.get_ticks()
         #check if animation is completed
-        if self.frame_index >= len(self.animationList):
+        if self.frame_index >= len(self.animationList[self.action]):
             self.frame_index = 0
+
+    def updateAction(self, newAction):
+        #check if new action is different to previous one
+        if(newAction != self.action):
+            self.action = newAction
+            #update the animation settings
+            self.frame_index = 0
+            self.update_time = pygame.time.get_ticks()
 
     #draw rectangle on the screen
     #this is to help draw the character on the screen
